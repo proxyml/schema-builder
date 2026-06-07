@@ -425,6 +425,14 @@ function safeMin(nums) { return nums.reduce((a, b) => a < b ? a : b,  Infinity);
 function safeMax(nums) { return nums.reduce((a, b) => a > b ? a : b, -Infinity); }
 function round(n, d = 6) { const f = 10 ** d; return Math.round(n * f) / f; }
 
+// Numeric-aware ordering so values like [1, 2, 10] sort as 1 < 2 < 10, not "1" < "10" < "2".
+// Falls back to locale string comparison for non-numeric labels (e.g. "low"/"medium"/"high").
+function naturalSort(a, b) {
+  const na = Number(a), nb = Number(b);
+  if (!isNaN(na) && !isNaN(nb)) return na - nb;
+  return String(a).localeCompare(String(b));
+}
+
 /* ── type inference ──────────────────────────────────────────────────── */
 function inferType(values) {
   const clean = values.filter(v => v != null && v !== '');
@@ -458,10 +466,19 @@ function buildFeature(name, values, type, immutable) {
     return { type, name, lambda: round(mean(nums)), max: safeMax(nums), immutable };
   }
 
-  /* categorical / categorical_ordinal */
   const counts = {};
   clean.forEach(v => { const k = String(v); counts[k] = (counts[k] || 0) + 1; });
   const n = clean.length;
+
+  if (type === 'categorical_ordinal') {
+    // Ordinal features carry an explicit order — emit parallel `categories`/`probabilities`
+    // arrays (low → high) rather than the unordered `valid_categories` map plain categoricals use.
+    const categories = Object.keys(counts).sort(naturalSort);
+    const probabilities = categories.map(k => round(counts[k] / n));
+    return { type, name, categories, probabilities, immutable };
+  }
+
+  /* categorical */
   const valid_categories = Object.fromEntries(
     Object.entries(counts).map(([k, v]) => [k, round(v / n)])
   );
