@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ProxyML — Schema Generator</title>
   <meta name="description" content="Generate a ProxyML feature schema from a CSV file. Infers types, distributions, and ranges. Your data never leaves your browser." />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%230d1117'/><g stroke='%23b4d2f0' stroke-width='1.6' stroke-linecap='round' fill='none'><circle cx='9' cy='16' r='2.4'/><circle cx='23' cy='9' r='2.4'/><circle cx='23' cy='23' r='2.4'/><path d='M11 14.9 L21 9.6'/><path d='M11 17.1 L21 22.4'/></g></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230d1117'/><mask id='g' maskUnits='userSpaceOnUse' x='0' y='0' width='32' height='32'><rect width='32' height='32' fill='%23fff'/><rect x='3.6' y='9.6' width='18.8' height='18.8' rx='4.6' fill='%23000'/></mask><rect x='11' y='5' width='16' height='16' rx='3.2' fill='%234f6581' mask='url(%23g)'/><rect x='5' y='11' width='16' height='16' rx='3.2' fill='%23b4d2f0'/></svg>" />
+  <meta name="theme-color" content="#0d1117" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet" />
   <style>
@@ -71,7 +72,8 @@
       display: flex; align-items: center; justify-content: space-between;
       padding-top: 1rem; padding-bottom: 1rem;
     }
-    .logo { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; color: var(--white); text-decoration: none; letter-spacing: -.02em; }
+    .logo { display: inline-flex; align-items: center; font-family: var(--serif); font-weight: 600; font-size: 1.2rem; color: var(--white); text-decoration: none; letter-spacing: -.02em; }
+    .logo-mark { width: 1.4rem; height: 1.4rem; margin-right: .5rem; flex: 0 0 auto; display: block; }
     .logo span { color: var(--accent-lt); }
     nav a { color: var(--muted); text-decoration: none; font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; transition: color .2s; white-space: nowrap; }
     nav a:hover { color: var(--accent-lt); }
@@ -198,6 +200,9 @@
     .footer-left { color: var(--muted); font-size: .8rem; }
     .footer-left a { color: var(--muted); text-decoration: none; }
     .footer-left a:hover { color: var(--accent-lt); }
+    .footer-brand { display: flex; align-items: center; font-family: var(--serif); font-weight: 600; font-size: 1.05rem; letter-spacing: -.02em; color: var(--text); margin-bottom: .85rem; }
+    .footer-brand span { color: var(--accent-lt); }
+    .footer-mark { width: 1.2rem; height: 1.2rem; margin-right: .5rem; flex: 0 0 auto; display: block; }
     .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { color: var(--muted); text-decoration: none; font-size: .8rem; transition: color .2s; }
     .footer-links a:hover { color: var(--accent-lt); }
@@ -234,7 +239,7 @@
 
 <nav>
   <div class="wrap">
-    <a href="https://proxyml.ai/" class="logo">Proxy<span>ML</span></a>
+    <a href="https://proxyml.ai/" class="logo"><svg class="logo-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><mask id="navmark" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32"><rect width="32" height="32" fill="#fff"></rect><rect x="3.6" y="9.6" width="18.8" height="18.8" rx="4.6" fill="#000"></rect></mask><rect x="11" y="5" width="16" height="16" rx="3.2" fill="#4f6581" mask="url(#navmark)"></rect><rect x="5" y="11" width="16" height="16" rx="3.2" fill="#b4d2f0"></rect></svg>Proxy<span>ML</span></a>
     <div class="nav-links">
       <a href="https://proxyml.ai/" data-secondary>← Back to site</a>
       <a href="https://github.com/proxyml/proxyml-sdk-python" target="_blank" data-secondary>GitHub</a>
@@ -318,7 +323,10 @@
 
 <footer>
   <div class="wrap">
-    <div class="footer-left">© 2026 ProxyML &nbsp;·&nbsp; <a href="https://proxyml.ai/">proxyml.ai</a></div>
+    <div class="footer-left">
+      <div class="footer-brand"><svg class="footer-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><mask id="footmark" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32"><rect width="32" height="32" fill="#fff"></rect><rect x="3.6" y="9.6" width="18.8" height="18.8" rx="4.6" fill="#000"></rect></mask><rect x="11" y="5" width="16" height="16" rx="3.2" fill="#4f6581" mask="url(#footmark)"></rect><rect x="5" y="11" width="16" height="16" rx="3.2" fill="#b4d2f0"></rect></svg>Proxy<span>ML</span></div>
+      © 2026 ProxyML &nbsp;·&nbsp; <a href="https://proxyml.ai/">proxyml.ai</a>
+    </div>
     <div class="footer-links">
       <a href="https://github.com/proxyml/proxyml-sdk-python" target="_blank">GitHub</a>
       <a href="https://github.com/proxyml/proxyml-sdk-python/blob/main/docs/quickstart.md" target="_blank">Docs</a>
